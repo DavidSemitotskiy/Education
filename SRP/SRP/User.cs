@@ -1,39 +1,31 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using System;
 
 namespace SRP
 {
     public class User
     {
-        private IUserStore store;
+        private string _name;
 
-        public User(IUserStore store)
+        public User(string name)
         {
-            this.store = store;
+            _name = name;
         }
 
-        private string name;
-
-        public string Name
+        public string GetName()
         {
-            get => this.name;
-            set
+            return this._name;
+        }
+
+        public void SetName(string newName, IUserStore users)
+        {
+            var userExists = users.FindUserByName(newName) != null;
+            
+            if (userExists)
             {
-                var userExists = this.store.FindUserByName(value) != null;
-
-                if (userExists)
-                {
-                    throw new Exception($"The name {value} is already taken");
-                }
-
-                this.name = value;
+                throw new Exception($"The name {newName} is already taken");
             }
-        }
 
-        public void SaveToFile(string fileName)
-        {
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(this));
+            this._name = newName;
         }
     }
 }
