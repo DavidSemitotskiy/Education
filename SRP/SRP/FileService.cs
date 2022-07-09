@@ -8,7 +8,7 @@ namespace SRP
 {
     public class FileService
     {
-        public void SaveToFile(string fileName, UserStore users)
+        public void SaveToFile(string fileName, IUserStore users)
         {
             File.WriteAllText(fileName, JsonConvert.SerializeObject(users));
         }
