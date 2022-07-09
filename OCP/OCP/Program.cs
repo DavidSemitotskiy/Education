@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using OCP.Domain;
 namespace OCP
 {
     class Program
@@ -30,6 +30,7 @@ namespace OCP
 
             // BA: - We need a custom filter that allows end user to filter users in a way he likes
             // You: "%$#%!&??@!!!!!". - I need time to re-write the code.
+            var resultOfCustomSearch = userManager.GetUsersCustomFilter(user => user.Role == Roles.Admin);
         }
     }
 }

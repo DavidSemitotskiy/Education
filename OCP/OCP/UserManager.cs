@@ -1,5 +1,6 @@
 ﻿using OCP.Domain;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OCP
@@ -15,5 +16,10 @@ namespace OCP
         public User[] GetSimpleUsers() => this.userStore.Users.Where(u => u.Role != Roles.Admin && !u.IsPremiumUser).ToArray();
 
         public User[] GetSimpleUsersWhosSubscriptionHasExpired() => throw new NotImplementedException();
+
+        public User[] GetUsersCustomFilter(Func<User, bool> expression)
+        {
+            return this.userStore.Users.Where(expression).ToArray();
+        }
     }
 }
