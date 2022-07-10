@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace LSP
 {
@@ -14,10 +15,21 @@ namespace LSP
                 new Ostrich()
             };
 
-            FlyBirdsFly(birds);
+            WaveBirdsWave(birds);
+            Console.WriteLine();
+            var sortResult = birds.OfType<FlyingBird>().ToArray();
+            FlyBirdsFly(sortResult);
         }
 
-        public static void FlyBirdsFly(Bird[] birds)
+        public static void WaveBirdsWave(Bird[] birds)
+        {
+            foreach (var bird in birds)
+            {
+                bird.WaveWing();
+            }
+        }
+
+        public static void FlyBirdsFly(FlyingBird[] birds)
         {
             foreach (var bird in birds)
             {
