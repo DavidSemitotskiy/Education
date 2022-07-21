@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace BinaryTreeCol
 {
-    public class Node
+    public class Node<T> where T: IComparable<T>
     {
-        public Node left;
+        public Node<T> left;
 
-        public Node right;
+        public Node<T> right;
 
-        public Node(int value)
+        public Node(T value)
         {
             Value = value;
         }
 
-        public int Value { get; set; }
+        public T Value { get; set; }
     }
 }

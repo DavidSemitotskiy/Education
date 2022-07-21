@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace BinaryTreeCol
 {
-    public class BinaryTree<T> : ICollection<int>
+    public class BinaryTree<T> : ICollection<T> where T: IComparable<T>
     {
         private int Length = 0;
 
-        private Node _binaryTreeNode;
+        private Node<T> _binaryTreeNode;
 
-        public BinaryTree(IBinaryTreeEnumerator enumerator)
+        public BinaryTree(IBinaryTreeEnumerator<T> enumerator)
         {
             Enumerator = enumerator;
         }
 
-        public Node BinaryTreeNode
+        public Node<T> BinaryTreeNode
         {
             get
             {
@@ -26,13 +26,13 @@ namespace BinaryTreeCol
             }
         }
 
-        public IBinaryTreeEnumerator Enumerator { get; set; }
+        public IBinaryTreeEnumerator<T> Enumerator { get; set; }
 
         public int Count => Length;
 
         public bool IsReadOnly => false;
 
-        public void Add(int item)
+        public void Add(T item)
         {
             AddNewItem(ref _binaryTreeNode, item);
             Length++;
@@ -44,12 +44,12 @@ namespace BinaryTreeCol
             _binaryTreeNode = null;
         }
 
-        public bool Contains(int item)
+        public bool Contains(T item)
         {
             return ContainsElement(BinaryTreeNode, item);
         }
 
-        public void CopyTo(int[] array, int arrayIndex)
+        public void CopyTo(T[] array, int arrayIndex)
         {
             var binaryCollection = Enumerator.GetEnumerator(BinaryTreeNode).ToArray();
             for (int i = arrayIndex, j = 0; i < array.Length; i++, j++)
@@ -58,7 +58,7 @@ namespace BinaryTreeCol
             }
         }
 
-        public bool Remove(int item)
+        public bool Remove(T item)
         {
             var binaryCollection = Enumerator.GetEnumerator(BinaryTreeNode).ToList();
             if (!binaryCollection.Contains(item))
@@ -67,21 +67,21 @@ namespace BinaryTreeCol
             }
 
             binaryCollection.Remove(item);
-            var binaryTree = binaryCollection.ToBinary<int>();
+            var binaryTree = binaryCollection.ToBinary();
             _binaryTreeNode = binaryTree.BinaryTreeNode;
             Length--;
             return true;
         }
 
-        private void AddNewItem(ref Node node, int item)
+        private void AddNewItem(ref Node<T> node, T item)
         {
             if (node == null)
             {
-                node = new Node(item);
+                node = new Node<T>(item);
                 return;
             }
 
-            if (node.Value > item)
+            if (node.Value.CompareTo(item) > 0)
             {
                 AddNewItem(ref node.left, item);
             }
@@ -92,19 +92,19 @@ namespace BinaryTreeCol
             }
         }
 
-        private bool ContainsElement(Node node, int item)
+        private bool ContainsElement(Node<T> node, T item)
         {
             if (node == null)
             {
                 return false;
             }
 
-            if (node.Value == item)
+            if (node.Value.CompareTo(item) == 0)
             {
                 return true;
             }
 
-            else if (node.Value > item)
+            else if (node.Value.CompareTo(item) > 0)
             {
                 return ContainsElement(node.left, item);
             }
@@ -115,7 +115,7 @@ namespace BinaryTreeCol
             }
         }
 
-        IEnumerator<int> IEnumerable<int>.GetEnumerator()
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             if (Enumerator == null)
             {
@@ -127,7 +127,7 @@ namespace BinaryTreeCol
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (this as IEnumerable<int>).GetEnumerator();
+            return (this as IEnumerable<T>).GetEnumerator();
         }
     }
 }

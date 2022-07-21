@@ -10,7 +10,7 @@ public class Program
 {
     public static void Main()
     {
-        BinaryTree<int> binaryTree = new BinaryTree<int>(new DirectBinaryEnumerator()) { };
+        BinaryTree<int> binaryTree = new BinaryTree<int>(new DirectBinaryEnumerator<int>()) { };
        
         binaryTree.Add(33);
         binaryTree.Add(55);
@@ -31,7 +31,7 @@ public class Program
             Console.Write($"{item} ");
         }
 
-        binaryTree.Enumerator = new ReverseBinaryTreeEnumerator();
+        binaryTree.Enumerator = new ReverseBinaryTreeEnumerator<int>();
         Console.Write("\nPost-order: ");
         foreach (var item in binaryTree)
         {
@@ -46,7 +46,7 @@ public class Program
         
         Console.WriteLine($"\nContains element 5? - {binaryTree.Contains(5)}");
 
-        binaryTree.Enumerator = new DirectBinaryEnumerator();
+        binaryTree.Enumerator = new DirectBinaryEnumerator<int>();
         Console.Write($"Binary tree after removing 5 - \"{binaryTree.Remove(5)}\": ");
         foreach (var item in binaryTree)
         {
@@ -62,14 +62,14 @@ public class Program
         }
 
         Console.Write("\nResult searching: ");
-        var resultFilter = binaryTree.Where(item => item > 12).ToBinary<int>();
+        var resultFilter = binaryTree.Where(item => item > 12).ToBinary();
         foreach (var item in resultFilter)
         {
             Console.Write($"{item} ");
         }
 
         Console.Write("\nResult ordering: ");
-        var resultOrder = binaryTree.OrderBy(i => i).ToBinary<int>();
+        var resultOrder = binaryTree.OrderBy(i => i).ToBinary();
         foreach (var item in resultOrder)
         {
             Console.Write($"{item} ");
@@ -81,7 +81,7 @@ public class Program
 
         Console.Write("Converting any collection to BinaryTree: ");
         var list = new List<int>() {34, 21, 5, 3, 12, 6, 8};
-        var resultConverting = list.ToBinary<int>();
+        var resultConverting = list.ToBinary();
         foreach ( var item in resultConverting)
         {
             Console.Write($"{item} ");
@@ -89,5 +89,20 @@ public class Program
 
         binaryTree.Clear();
         Console.WriteLine($"\nBinaryTree after cleaning: {binaryTree.Count}");
+
+        var strBinaryTree = new BinaryTree<string>(new DirectBinaryEnumerator<string>());
+        strBinaryTree.Add("adadawda");
+        strBinaryTree.Add("fafafasfaf");
+        strBinaryTree.Add("jdjadjajdjwa");
+        strBinaryTree.Add("kkkkkk");
+        strBinaryTree.Add("a");
+        Console.Write("Test BinaryTree with strings: ");
+        foreach (var item in strBinaryTree)
+        {
+            Console.Write($"{item} ");
+        }
+
+        var listStrings = new List<string>() { "jjdajdjad", "dkdkadk", "kdkadk"};
+        var resultConvertingFromList = listStrings.ToBinary();
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BinaryTreeCol
 {
-    public interface IBinaryTreeEnumerator
+    public interface IBinaryTreeEnumerator<T> where T: IComparable<T>
     {
-        IEnumerable<int> GetEnumerator(Node node);
+        IEnumerable<T> GetEnumerator(Node<T> node);
     }
 }

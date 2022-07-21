@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BinaryTreeCol
 {
-    public class DirectBinaryEnumerator : IBinaryTreeEnumerator
+    public class DirectBinaryEnumerator<T> : IBinaryTreeEnumerator<T> where T : IComparable<T>
     {
-        public IEnumerable<int> GetEnumerator(Node node)
+        public IEnumerable<T> GetEnumerator(Node<T> node)
         {
             if (node == null)
             {
