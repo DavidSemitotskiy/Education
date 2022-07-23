@@ -119,10 +119,15 @@ namespace Navigation
         public void ShowHierarchyFilesDirectories()
         {
             var drivers = DriveInfo.GetDrives();
-            Console.WriteLine("Drivers:");
             foreach (var drive in drivers)
             {
                 Console.WriteLine(drive.Name);
+                if (!drive.IsReady)
+                {
+                    Console.WriteLine("\tThis drive isn't able to read!");
+                    continue;
+                }
+                ShowDirectoriesAndFiles(drive.RootDirectory.ToString());
             }
 
             Console.WriteLine($"Current Directory: {Navigation.CurrentDirectory}");
@@ -151,6 +156,32 @@ namespace Navigation
             foreach (var file in resultOrdering)
             {
                 Console.WriteLine(file.FullName);
+            }
+        }
+
+        private void ShowDirectoriesAndFiles(string path)
+        {
+            DirectoryInfo directory = null;
+            FileInfo[] files = null;
+            try
+            {
+                foreach (var dir in Directory.GetDirectories(path))
+                {
+                    directory = new DirectoryInfo(dir);
+                    Console.WriteLine($"\tDirectory {directory.FullName}");
+
+                    files = directory.GetFiles();
+                    foreach (var file in files)
+                    {
+                        Console.WriteLine($"\t\t File {file.FullName}");
+                    }
+
+                    ShowDirectoriesAndFiles(directory.FullName);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\t\t\t Can't read {ex.Message}");
             }
         }
     }
