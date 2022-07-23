@@ -12,13 +12,11 @@ namespace Navigation
         {
             UserNavigationRepository repository = new UserNavigationRepository();
             NavigationService navigationService = new NavigationService(repository);
+            navigationService.ShowHierarchyFilesDirectories();
             while (true)
             {
-                navigationService.ShowHierarchyFilesDirectories();
                 navigationService.InputCommand(Console.ReadLine());
                 navigationService.SaveNavigation();
-                Console.ReadLine();
-                Console.Clear();
             }
         }
     }

@@ -39,13 +39,6 @@ namespace Navigation
             else if (Regex.IsMatch(command, openFileCommandPattern))
             {
                 var filePath = command.Split("\"", StringSplitOptions.RemoveEmptyEntries)[1];
-                if (!(filePath.EndsWith(".txt") || filePath.EndsWith(".bin")))
-                {
-                    Console.WriteLine("Incorrect file to read!");
-                    Navigation.NavigationUser.Add($"User inputted file with incorrect extension {Path.GetExtension(filePath)} - {DateTime.Now}");
-                    return;
-                }
-
                 if (!File.Exists(filePath))
                 {
                     Console.WriteLine("There isn't such file");
@@ -78,36 +71,28 @@ namespace Navigation
         {
             Navigation.CurrentFile = path;
             Navigation.NavigationUser.Add($@"User openned file with path: {Navigation.CurrentFile} - {DateTime.Now}");
-            
-            switch (path[^3..^0])
+            using (FileStream file = new FileStream(path, FileMode.Open))
             {
-                case "txt":
-                    using (StreamReader streamReader = new StreamReader(path))
-                    {
-                        char[] bufferForFile = new char[500];
-                        streamReader.Read(bufferForFile, 0, bufferForFile.Length);
-                        string strFromFile = new string(bufferForFile);
-                        Console.WriteLine($"Extracted first 500 characters from text file: {strFromFile}");
-                    }
-
-                    break;
-
-                case "bin":
-                    using (FileStream fileStream = new FileStream(path, FileMode.Open))
-                    {
-                        byte[] buffer = new byte[500];
-                        if (fileStream.Length == 0)
-                        {
-                            return;
-                        }
-
-                        fileStream.Read(buffer, 0, buffer.Length);
-                        string decodingText = Encoding.Default.GetString(buffer);
-                        fileStream.Close();
-                        Console.WriteLine($"Extracted first 500 bytes from binary file: {decodingText}");
-                    }
-               
-                    break;
+                byte[] buffer = new byte[10];
+                file.Read(buffer, 0, buffer.Length);
+                string str = Encoding.Default.GetString(buffer);
+                if (str.Any(ch => char.IsControl(ch) && ch != '\0'))
+                {
+                    byte[] binaryBuffer = new byte[500];
+                    file.Read(binaryBuffer, 0, binaryBuffer.Length);
+                    string strBinary = Encoding.Default.GetString(binaryBuffer);
+                    Console.WriteLine(strBinary);
+                }
+                else
+                {
+                    char[] bufferForText = new char[500];
+                    using StreamReader streamReader = new StreamReader(file);
+                    streamReader.Read(bufferForText, 0, bufferForText.Length);
+                    string strText = new string(bufferForText);
+                    Console.WriteLine(strText);
+                    streamReader.Close();
+                }
+                file.Close();
             }
         }
 
