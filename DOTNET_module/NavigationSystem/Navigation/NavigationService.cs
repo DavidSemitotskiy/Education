@@ -27,34 +27,17 @@ namespace Navigation
             if (Regex.IsMatch(command, openDirectoryCommandPattern))
             {
                 var directoryPath = command.Split("\"", StringSplitOptions.RemoveEmptyEntries)[1];
-                if (!Directory.Exists(directoryPath))
-                {
-                    Console.WriteLine("There isn't such directory");
-                    Navigation.NavigationUser.Add($"User inputted incorrect directory with name {directoryPath} - {DateTime.Now}");
-                    return true;
-                }
-
                 OpenDirectoryCommand(directoryPath);
-                return true;
             }
             else if (Regex.IsMatch(command, openFileCommandPattern))
             {
                 var filePath = command.Split("\"", StringSplitOptions.RemoveEmptyEntries)[1];
-                if (!File.Exists(filePath))
-                {
-                    Console.WriteLine("There isn't such file");
-                    Navigation.NavigationUser.Add($"User inputted incorrect file with name {filePath} - {DateTime.Now}");
-                    return true;
-                }
-
                 OpenFileCommand(filePath);
-                return true;
             }
             else if (Regex.IsMatch(command, sortFilesCommandPattern))
             {
                 var categorySorting = command.Split(" ", StringSplitOptions.RemoveEmptyEntries)[1];
                 SortFiles(categorySorting);
-                return true;
             }
             else if (command == "exit")
             {
@@ -64,12 +47,20 @@ namespace Navigation
             {
                 Console.WriteLine("Incorrect Command");
                 Navigation.NavigationUser.Add($"User inputted incorrect command {command} - {DateTime.Now}");
-                return true;
             }
+
+            return true;
         }
 
         public void OpenDirectoryCommand(string path)
         {
+            if (!Directory.Exists(path))
+            {
+                Console.WriteLine("There isn't such directory");
+                Navigation.NavigationUser.Add($"User inputted incorrect directory with name {path} - {DateTime.Now}");
+                return;
+            }
+
             Navigation.CurrentDirectory = path;
             Directory.SetCurrentDirectory(Navigation.CurrentDirectory);
             Console.WriteLine($"Current Directory: {Navigation.CurrentDirectory}");
@@ -77,6 +68,13 @@ namespace Navigation
         }
         public void OpenFileCommand(string path)
         {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("There isn't such file");
+                Navigation.NavigationUser.Add($"User inputted incorrect file with name {path} - {DateTime.Now}");
+                return;
+            }
+
             Navigation.CurrentFile = path;
             try
             {
