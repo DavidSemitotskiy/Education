@@ -19,22 +19,23 @@ namespace Navigation
 
         public UserNavigation Navigation { get; private set; }
 
-        public void InputCommand(string command)
+        public bool InputCommand(string command)
         {
             string openDirectoryCommandPattern = "^open dir \"(\\w|[A-z]|\\W)*\"";
             string openFileCommandPattern = "^open \"((\\W|[A-z]|\\w)*|(bin|txt)$)\"";
             string sortFilesCommandPattern = @"^sort\s(filename|created|modified)$";
-            if (Regex.IsMatch(command,openDirectoryCommandPattern))
+            if (Regex.IsMatch(command, openDirectoryCommandPattern))
             {
                 var directoryPath = command.Split("\"", StringSplitOptions.RemoveEmptyEntries)[1];
                 if (!Directory.Exists(directoryPath))
                 {
                     Console.WriteLine("There isn't such directory");
                     Navigation.NavigationUser.Add($"User inputted incorrect directory with name {directoryPath} - {DateTime.Now}");
-                    return;
+                    return true;
                 }
 
                 OpenDirectoryCommand(directoryPath);
+                return true;
             }
             else if (Regex.IsMatch(command, openFileCommandPattern))
             {
@@ -43,20 +44,27 @@ namespace Navigation
                 {
                     Console.WriteLine("There isn't such file");
                     Navigation.NavigationUser.Add($"User inputted incorrect file with name {filePath} - {DateTime.Now}");
-                    return;
+                    return true;
                 }
 
                 OpenFileCommand(filePath);
+                return true;
             }
             else if (Regex.IsMatch(command, sortFilesCommandPattern))
             {
                 var categorySorting = command.Split(" ", StringSplitOptions.RemoveEmptyEntries)[1];
                 SortFiles(categorySorting);
+                return true;
+            }
+            else if (command == "exit")
+            {
+                return false;
             }
             else
             {
                 Console.WriteLine("Incorrect Command");
                 Navigation.NavigationUser.Add($"User inputted incorrect command {command} - {DateTime.Now}");
+                return true;
             }
         }
 
@@ -64,35 +72,44 @@ namespace Navigation
         {
             Navigation.CurrentDirectory = path;
             Directory.SetCurrentDirectory(Navigation.CurrentDirectory);
+            Console.WriteLine($"Current Directory: {Navigation.CurrentDirectory}");
             Navigation.NavigationUser.Add($"User changed current directory into {Navigation.CurrentDirectory} - {DateTime.Now}");
         }
-
         public void OpenFileCommand(string path)
         {
             Navigation.CurrentFile = path;
-            Navigation.NavigationUser.Add($@"User openned file with path: {Navigation.CurrentFile} - {DateTime.Now}");
-            using (FileStream file = new FileStream(path, FileMode.Open))
+            try
             {
-                byte[] buffer = new byte[10];
-                file.Read(buffer, 0, buffer.Length);
-                string str = Encoding.Default.GetString(buffer);
-                if (str.Any(ch => char.IsControl(ch) && ch != '\0'))
+                using (FileStream file = new FileStream(path, FileMode.Open))
                 {
-                    byte[] binaryBuffer = new byte[500];
-                    file.Read(binaryBuffer, 0, binaryBuffer.Length);
-                    string strBinary = Encoding.Default.GetString(binaryBuffer);
-                    Console.WriteLine(strBinary);
+                    byte[] buffer = new byte[100];
+                    file.Read(buffer, 0, buffer.Length);
+                    string str = Encoding.Default.GetString(buffer);
+                    if (str.Any(symbol => char.IsControl(symbol) && symbol != '\r' && symbol != '\n' && symbol != '\t'))
+                    {
+                        byte[] binaryBuffer = new byte[500];
+                        file.Read(binaryBuffer, 0, binaryBuffer.Length);
+                        string strBinary = Encoding.Default.GetString(binaryBuffer);
+                        Console.WriteLine(strBinary);
+                    }
+                    else
+                    {
+                        char[] bufferForText = new char[500];
+                        using StreamReader streamReader = new StreamReader(file);
+                        streamReader.Read(bufferForText, 0, bufferForText.Length);
+                        string strText = new string(bufferForText);
+                        Console.WriteLine(strText);
+                        streamReader.Close();
+                    }
+                    file.Close();
                 }
-                else
-                {
-                    char[] bufferForText = new char[500];
-                    using StreamReader streamReader = new StreamReader(file);
-                    streamReader.Read(bufferForText, 0, bufferForText.Length);
-                    string strText = new string(bufferForText);
-                    Console.WriteLine(strText);
-                    streamReader.Close();
-                }
-                file.Close();
+                Navigation.NavigationUser.Add($@"User openned file with path: {Navigation.CurrentFile} - {DateTime.Now}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Navigation.NavigationUser.Add($@"File can't be readed: {Navigation.CurrentFile} - {DateTime.Now}");
+
             }
         }
 

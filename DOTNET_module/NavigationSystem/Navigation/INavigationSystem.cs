@@ -10,7 +10,7 @@ namespace Navigation
     {
         void ShowHierarchyFilesDirectories();
 
-        void InputCommand(string command);
+        bool InputCommand(string command);
 
         void OpenDirectoryCommand(string path);
 
