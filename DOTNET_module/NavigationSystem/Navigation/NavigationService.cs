@@ -99,15 +99,16 @@ namespace Navigation
                         Console.WriteLine(strText);
                         streamReader.Close();
                     }
+
                     file.Close();
                 }
+
                 Navigation.NavigationUser.Add($@"User openned file with path: {Navigation.CurrentFile} - {DateTime.Now}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Navigation.NavigationUser.Add($@"File can't be readed: {Navigation.CurrentFile} - {DateTime.Now}");
-
             }
         }
 
@@ -127,6 +128,7 @@ namespace Navigation
                     Console.WriteLine("\tThis drive isn't able to read!");
                     continue;
                 }
+
                 ShowDirectoriesAndFiles(drive.RootDirectory.ToString());
             }
 
@@ -169,7 +171,6 @@ namespace Navigation
                 {
                     directory = new DirectoryInfo(dir);
                     Console.WriteLine($"\tDirectory {directory.FullName}");
-
                     files = directory.GetFiles();
                     foreach (var file in files)
                     {

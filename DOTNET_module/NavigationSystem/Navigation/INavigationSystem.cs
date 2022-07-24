@@ -19,6 +19,5 @@ namespace Navigation
         void SaveNavigation();
 
         void SortFiles(string categorySorting);
-
     }
 }

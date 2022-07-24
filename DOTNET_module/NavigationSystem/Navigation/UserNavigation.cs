@@ -8,7 +8,6 @@ namespace Navigation
 {
     public class UserNavigation
     {
-
         public List<string> NavigationUser { get; } = new List<string>();
 
         public string CurrentFile { get; set; } = "";
