@@ -75,7 +75,6 @@ namespace Navigation
                 return;
             }
 
-            Navigation.CurrentFile = path;
             try
             {
                 using (FileStream file = new FileStream(path, FileMode.Open))
@@ -103,12 +102,12 @@ namespace Navigation
                     file.Close();
                 }
 
-                Navigation.NavigationUser.Add($@"User openned file with path: {Navigation.CurrentFile} - {DateTime.Now}");
+                Navigation.NavigationUser.Add($@"User openned file with path: {path} - {DateTime.Now}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Navigation.NavigationUser.Add($@"File can't be readed: {Navigation.CurrentFile} - {DateTime.Now}");
+                Navigation.NavigationUser.Add($@"File can't be readed: {path} - {DateTime.Now}");
             }
         }
 

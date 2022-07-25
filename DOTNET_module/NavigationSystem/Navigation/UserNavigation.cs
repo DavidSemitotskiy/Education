@@ -10,8 +10,6 @@ namespace Navigation
     {
         public List<string> NavigationUser { get; } = new List<string>();
 
-        public string CurrentFile { get; set; } = "";
-
         public string CurrentDirectory { get; set; } = Directory.GetCurrentDirectory();
     }
 }

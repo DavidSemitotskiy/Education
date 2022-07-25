@@ -16,8 +16,6 @@ namespace Navigation
             {
                 file.Write(serializeUserNavigationHistory);
             }
-
-            UserNavigation user = JsonConvert.DeserializeObject<UserNavigation>(serializeUserNavigationHistory);
         }
     }
 }
