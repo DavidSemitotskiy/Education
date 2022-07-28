@@ -16,7 +16,6 @@ namespace Threads
             Random r = new Random();
 
             decimal[] arr = Enumerable.Range(0, 1000000).Select(_ => (decimal)r.NextDouble()).ToArray();
-            decimal sum = 0;
             List<Thread> listThreads = new List<Thread>();
             List<decimal> sumsThreads = new List<decimal>();
             var sw = Stopwatch.StartNew();
