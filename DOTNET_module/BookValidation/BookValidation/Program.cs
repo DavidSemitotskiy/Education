@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookValidation.Mapping;
+using BookValidation.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ namespace BookValidation
     {
         public static void Main()
         {
-
+            
         }
     }
 }
