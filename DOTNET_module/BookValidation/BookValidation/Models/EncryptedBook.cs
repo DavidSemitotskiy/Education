@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookValidation.Models
 {
-    public class Book
+    public class EncryptedBook
     {
-        public Book(Guid id, string authors, string title, int countPages, string datePublication, string format)
+        public EncryptedBook(Guid id, string authors, string title, int countPages, string datePublication, string format)
         {
             Authors = authors;
             Title = title;
@@ -19,7 +19,7 @@ namespace BookValidation.Models
         }
 
         public Guid Id { get; init; }
-
+        
         public string? Authors { get; set; }
 
         public string? Title { get; set; }
@@ -29,10 +29,5 @@ namespace BookValidation.Models
         public string DatePublication { get; set; }
 
         public string? Format { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Authors} - {Title}, {CountPages} ({DatePublication}).{Format}";
-        }
     }
 }
