@@ -9,7 +9,7 @@ namespace BookValidation.Interfaces
 {
     public interface IBookService
     {
-        FluentValidation.Results.ValidationResult AddBook(string authors, string title, int countPages, string datePublication, string format);
+        FluentValidation.Results.ValidationResult AddBook(string authors, string title, int countPages, DateTime datePublication, string format);
 
         Book LastPublishedBook();
 

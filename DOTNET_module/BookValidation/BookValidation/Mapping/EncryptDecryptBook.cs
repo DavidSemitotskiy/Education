@@ -29,7 +29,7 @@ namespace BookValidation.Mapping
                 EncryptField(book.Authors, Key, IV),
                 EncryptField(book.Title, Key, IV),
                 book.CountPages,
-                EncryptField(book.DatePublication, Key, IV),
+                book.DatePublication,
                 EncryptField(book.Format, Key, IV));
         }
 
@@ -38,7 +38,7 @@ namespace BookValidation.Mapping
             return new Book(encryptedBook.Id, DecryptField(encryptedBook.Authors, Key, IV),
                 DecryptField(encryptedBook.Title, Key, IV),
                 encryptedBook.CountPages,
-                DecryptField(encryptedBook.DatePublication, Key, IV),
+                encryptedBook.DatePublication,
                 DecryptField(encryptedBook.Format, Key, IV));
         }
 

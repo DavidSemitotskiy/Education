@@ -8,7 +8,7 @@ namespace BookValidation.Models
 {
     public class EncryptedBook
     {
-        public EncryptedBook(Guid id, string authors, string title, int countPages, string datePublication, string format)
+        public EncryptedBook(Guid id, string authors, string title, int countPages, DateTime datePublication, string format)
         {
             Authors = authors;
             Title = title;
@@ -26,7 +26,7 @@ namespace BookValidation.Models
 
         public int CountPages { get; set; }
 
-        public string DatePublication { get; set; }
+        public DateTime DatePublication { get; set; }
 
         public string? Format { get; set; }
     }
