@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace BookValidation.Models
 
         public override string ToString()
         {
-            return $"{Authors} - {Title}, {CountPages} ({DatePublication}).{Format}";
+            return $"{Authors} - {Title}, {CountPages} ({DatePublication.ToString($"dd.MM.yyyy")}).{Format}";
         }
     }
 }
