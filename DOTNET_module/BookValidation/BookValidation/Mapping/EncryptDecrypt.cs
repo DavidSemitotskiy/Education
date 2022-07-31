@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace BookValidation.Mapping
 {
-    public static class EncryptDecryptBook
+    public class EncryptDecrypt
     {
-        static EncryptDecryptBook()
+        public EncryptDecrypt()
         {
             FileInfo file = new FileInfo(@"../../../../appsettings.json");
             IConfiguration config = new ConfigurationBuilder().AddJsonFile(file.FullName).Build();
@@ -19,11 +19,11 @@ namespace BookValidation.Mapping
             Key = Encoding.Default.GetBytes(KeyForEncrypt);
         }
 
-        private static byte[] Key { get; } 
+        private byte[] Key { get; } 
 
-        private static byte[] IV { get; } = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private byte[] IV { get; } = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-        public static EncryptedBook EncryptBook(Book book)
+        public EncryptedBook EncryptBook(Book book)
         {
             return new EncryptedBook(book.Id,
                 EncryptField(book.Authors, Key, IV),
@@ -33,7 +33,7 @@ namespace BookValidation.Mapping
                 EncryptField(book.Format, Key, IV));
         }
 
-        public static Book DecryptBook(EncryptedBook encryptedBook)
+        public Book DecryptBook(EncryptedBook encryptedBook)
         {
             return new Book(encryptedBook.Id, DecryptField(encryptedBook.Authors, Key, IV),
                 DecryptField(encryptedBook.Title, Key, IV),
@@ -42,7 +42,7 @@ namespace BookValidation.Mapping
                 DecryptField(encryptedBook.Format, Key, IV));
         }
 
-        private static string EncryptField(string plainText, byte[] key, byte[] IV)
+        private string EncryptField(string plainText, byte[] key, byte[] IV)
         {
             using (AesManaged aes = new AesManaged())
             {
@@ -57,7 +57,7 @@ namespace BookValidation.Mapping
             }
         }
 
-        private static string DecryptField(string encryptedText, byte[] key, byte[] IV)
+        private string DecryptField(string encryptedText, byte[] key, byte[] IV)
         {
             using (AesManaged aes = new AesManaged())
             {

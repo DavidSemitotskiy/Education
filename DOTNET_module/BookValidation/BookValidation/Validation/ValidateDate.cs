@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace BookValidation.Validation
 {
-    public static class ValidateDate
+    public class ValidateDate
     {
-        private static string _pattern = "^(?:(?:\\d{2}(?:\\.|/)\\d{2}(?:\\.|/)\\d{4})|\\d{4})$";
+        private string _pattern = "^(?:(?:\\d{2}(?:\\.|/)\\d{2}(?:\\.|/)\\d{4})|\\d{4})$";
 
-        public static bool IsValidDate(ref string inputString)
+        public bool IsValidDate(ref string inputString)
         {
             Regex regex = new Regex(_pattern);
             if (inputString.Length == 4)

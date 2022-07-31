@@ -11,12 +11,12 @@ namespace BookValidation.Mapping
     {
         public static EncryptedBook ToEncryptedBook(this Book book)
         {
-            return EncryptDecryptBook.EncryptBook(book);
+            return new EncryptDecrypt().EncryptBook(book);
         }
 
         public static Book ToBook(this EncryptedBook encryptedBook)
         {
-            return EncryptDecryptBook.DecryptBook(encryptedBook);
+            return new EncryptDecrypt().DecryptBook(encryptedBook);
         }
     }
 }

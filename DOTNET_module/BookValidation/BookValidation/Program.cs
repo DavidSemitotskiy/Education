@@ -30,12 +30,12 @@ namespace BookValidation
             Console.InputEncoding = Encoding.Unicode;
             Console.WriteLine("<Автор> - <Назва>, <кількість сторінок>(<дата публікації>)<формат>");
             string information = Console.ReadLine();
-            var resultValidation = ValidateBook.IsValidInputString(information);
+            var resultValidation = new ValidateBook().IsValidInputString(information);
             if (resultValidation.Success)
             {
                 DateTime date = new DateTime();
                 string datePublication = resultValidation.Groups[4].Value;
-                if (ValidateDate.IsValidDate(ref datePublication))
+                if (new ValidateDate().IsValidDate(ref datePublication))
                 {
                      date = DateTime.Parse(datePublication);
                 }
@@ -123,7 +123,8 @@ namespace BookValidation
             string secondDate = Console.ReadLine();
             DateTime x = new DateTime();
             DateTime y = new DateTime();
-            if (ValidateDate.IsValidDate(ref firstDate) && ValidateDate.IsValidDate(ref secondDate))
+            ValidateDate validate = new ValidateDate();
+            if (validate.IsValidDate(ref firstDate) && validate.IsValidDate(ref secondDate))
             {
                 x = DateTime.Parse(firstDate);
                 y = DateTime.Parse(secondDate);
@@ -161,7 +162,7 @@ namespace BookValidation
             Console.Write("Введіть дату: ");
             string date = Console.ReadLine();
             DateTime dateTime = new DateTime();
-            if (ValidateDate.IsValidDate(ref date))
+            if (new ValidateDate().IsValidDate(ref date))
             {
                 dateTime = DateTime.Parse(date);
             }
