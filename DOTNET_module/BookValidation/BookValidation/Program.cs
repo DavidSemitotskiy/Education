@@ -4,6 +4,7 @@ using BookValidation.Models;
 using BookValidation.Validation;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace BookValidation
         {
             IBookRepository bookRepository = new BookRepository();
             IBookService bookService = new BookService(bookRepository);
+            //CultureInfo.CurrentCulture = new CultureInfo("en-US");
             AddBook(bookService);
             SearchBook(bookService);
             AllAuthors(bookService);
