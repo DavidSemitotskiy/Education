@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EF_Response.Entities
 {
-    public class CommentForActor
+    public class CommentForActor : Comment
     {
     }
 }

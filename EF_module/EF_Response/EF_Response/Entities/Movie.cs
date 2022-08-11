@@ -8,5 +8,6 @@ namespace EF_Response.Entities
 {
     public class Movie
     {
+        public int Id { get; set; }
     }
 }

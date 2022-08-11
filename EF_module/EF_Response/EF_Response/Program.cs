@@ -8,5 +8,8 @@ namespace EF_Response
 {
     public class Program
     {
+        public static void Main()
+        {
+        }
     }
 }

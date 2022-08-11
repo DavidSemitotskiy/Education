@@ -8,5 +8,6 @@ namespace EF_Response.Entities
 {
     public class Actor
     {
+        public int Id { get; set; }
     }
 }

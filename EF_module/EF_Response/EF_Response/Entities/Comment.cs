@@ -8,5 +8,6 @@ namespace EF_Response.Entities
 {
     public class Comment
     {
+        public int Id { get; set; }
     }
 }
