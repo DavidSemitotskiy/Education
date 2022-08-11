@@ -9,5 +9,13 @@ namespace EF_Response.Entities
     public class Movie
     {
         public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public int Year { get; set; }
+
+        public string Ganre { get; set; }
+
+        public string Country { get; set; }
     }
 }
