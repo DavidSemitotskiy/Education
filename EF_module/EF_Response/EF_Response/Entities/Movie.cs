@@ -19,5 +19,7 @@ namespace EF_Response.Entities
         public string Country { get; set; }
 
         public ICollection<Actor> Actors { get; set; }
+
+        public ICollection<CommentForMovie> Comments { get; set; }
     }
 }
