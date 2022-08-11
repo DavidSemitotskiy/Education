@@ -17,5 +17,7 @@ namespace EF_Response.Entities
         public string Ganre { get; set; }
 
         public string Country { get; set; }
+
+        public ICollection<Actor> Actors { get; set; }
     }
 }

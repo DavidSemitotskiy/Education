@@ -17,5 +17,7 @@ namespace EF_Response.Entities
         public string Gander { get; set; }
 
         public string Country { get; set; }
+
+        public ICollection<Movie> Movies { get; set; }
     }
 }
