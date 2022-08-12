@@ -14,6 +14,6 @@ namespace EF_Response.Entities
 
         public Reaction Emotion { get; set; }
 
-        public byte Grade { get; set; }
+        public Grade Grade { get; set; }
     }
 }
