@@ -14,7 +14,7 @@ namespace EF_Response.Entities
 
         public int BirthYear { get; set; }
 
-        public string Gander { get; set; }
+        public Gender Gender { get; set; }
 
         public string Country { get; set; }
 
