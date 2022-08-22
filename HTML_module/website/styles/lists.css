@@ -1,0 +1,8 @@
+div.lists ul li {
+  list-style-type: circle;
+  font-size: 23px;
+}
+
+div.lists {
+  font-size: 17px;
+}
