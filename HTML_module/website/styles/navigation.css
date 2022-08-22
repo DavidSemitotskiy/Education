@@ -1,0 +1,34 @@
+body header div#wrapper {
+  display: flex;
+  justify-content: center;
+}
+body header section.nav {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: deepskyblue;
+  border-radius: 10px;
+  height: 50px;
+  width: 600px;
+}
+
+body header section.nav div {
+  padding: 16px;
+}
+
+body header section.nav div a {
+  display: block;
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+}
+
+body header section.nav div:hover {
+  background-color:aquamarine;
+}
+
+body header section.nav div:hover a {
+  color: black;
+  font-size: 15px;
+  padding: 2px;
+}
