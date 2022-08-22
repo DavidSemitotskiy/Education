@@ -1,0 +1,10 @@
+div.headers p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.headers h1 {
+  background-color:fuchsia;
+  color:greenyellow;
+  width: 50%;
+}
