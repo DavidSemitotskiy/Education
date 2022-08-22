@@ -1,0 +1,35 @@
+body div h1, h4 {
+  text-align: center;
+}
+
+body div h1 {
+  color: green;
+}
+
+body div img {
+  width: 200px;
+}
+
+.leftFloatImage {
+  float: left;
+  margin-top: 30px;
+  margin-right: 7px;
+}
+
+#foto1, #foto2 {
+  margin-left: 50px;
+  position: relative;
+  float: right;
+}
+
+#foto2 {
+  right: 130px;
+}
+
+body div table {
+  text-align: justify;
+}
+
+body div table p {
+  width: 800px;
+}

@@ -1,0 +1,22 @@
+header section.nav {
+  display: flex;
+  background-color:deepskyblue;
+  width: 50%;
+  height: 50px;
+  border-radius: 10px;
+}
+
+header section.nav div {
+  width: 100px
+}
+
+header section.nav div a {
+  display: flex;
+  justify-content: center; /*Центрирование по горизонтали*/
+  align-items: center;  
+}
+header section.nav div a span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
