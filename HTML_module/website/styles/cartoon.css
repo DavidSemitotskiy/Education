@@ -17,19 +17,14 @@ body div img {
 }
 
 #foto1, #foto2 {
-  margin-left: 50px;
   position: relative;
   float: right;
 }
 
 #foto2 {
-  right: 130px;
+  right: 100px;
 }
 
 body div table {
   text-align: justify;
-}
-
-body div table p {
-  width: 800px;
 }
