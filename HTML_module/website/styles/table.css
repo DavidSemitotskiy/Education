@@ -1,0 +1,9 @@
+table tbody td {
+  border: 2px solid;
+  border-color: green;
+}
+
+table {
+  border: 5px solid;
+  border-color: rgb(255, 196, 3);
+}
