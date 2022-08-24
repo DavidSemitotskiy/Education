@@ -1,4 +1,4 @@
-const randomNumber = Math.floor(Math.random() * (20 - 1) + 1);
+const randomNumber = Math.floor(Math.random() * (20 - 1)) + 1;
 while (true)
 {
   let userNumber = +prompt("Input Number"); 
