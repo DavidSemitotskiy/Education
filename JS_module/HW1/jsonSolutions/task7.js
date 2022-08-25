@@ -1,6 +1,8 @@
 function checkOnSymbol(arr) {
-  if (arr instanceof Array){
-    if (arr.length >= 1){
+  if (arr instanceof Array)
+  {
+    if (arr.length >= 1)
+    {
       return arr[0] == "1" || arr[arr.length - 1] == "1";
     }
   }
