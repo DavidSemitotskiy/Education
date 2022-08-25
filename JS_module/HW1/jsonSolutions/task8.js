@@ -1,7 +1,14 @@
 function getLastElements(arr, countElements = 1)
 {
-  if (arr instanceof Array){
-    return arr.slice(-countElements);
+  if (arr instanceof Array)
+  {
+    let array = arr.slice(-countElements);
+    if (array.length == 1)
+    {
+      return array[0];
+    }
+    
+    return array;
   }
 
   return null;
