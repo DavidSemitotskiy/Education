@@ -1,8 +1,12 @@
 const randomNumber = Math.floor(Math.random() * (20 - 1)) + 1;
 while (true)
 {
-  let userNumber = +prompt("Input Number"); 
-  if (userNumber == randomNumber)
+  let userNumber = Number(prompt("Input Number"));
+  if (isNaN(userNumber) || userNumber < 1)
+  {
+    alert("You inputted incorrect value!!!");
+  }
+  else if (userNumber == randomNumber)
   {
     alert("You picked correct number!!!");
     break;
