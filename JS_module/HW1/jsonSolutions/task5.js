@@ -1,6 +1,7 @@
 function addSymbolsToStr(str)
 {
-  if (str.startsWith("Py")){
+  if (str.startsWith("Py"))
+  {
     return str;
   }
 
