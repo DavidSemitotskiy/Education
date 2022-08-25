@@ -1,5 +1,7 @@
-function squarePolygon(num){
-  if (typeof(num) == "number" && num > 0){
+function squarePolygon(num)
+{
+  if (typeof(num) == "number" && num > 0)
+  {
     return (num * num) + ((num - 1) * (num - 1));
   }
 
