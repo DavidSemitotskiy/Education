@@ -1,5 +1,7 @@
-function removeDuplicates(arr){
-  if (arr instanceof Array){
+function removeDuplicates(arr)
+{
+  if (arr instanceof Array)
+  {
     for(let i = 0; i < arr.length; i++)
     {
       for (let j = i + 1; j < arr.length; j++)
