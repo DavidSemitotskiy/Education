@@ -1,4 +1,5 @@
 ﻿using ContactsWeb.Models;
+using ContactsWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,19 +9,17 @@ namespace ContactsWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IContactManager _contactManager;
+
+        public HomeController(ILogger<HomeController> logger, IContactManager contactManager)
         {
             _logger = logger;
+            _contactManager = contactManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(await _contactManager.GetAllContactsAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
