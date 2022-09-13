@@ -1,4 +1,5 @@
 using ContactsWeb.Data;
+using ContactsWeb.Entities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IRepository<Contact>, ContactRepository>();
 
 builder.Services.AddControllersWithViews();
 
