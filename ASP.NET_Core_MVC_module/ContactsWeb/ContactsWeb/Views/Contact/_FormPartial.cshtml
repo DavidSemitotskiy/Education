@@ -1,0 +1,15 @@
+﻿@model ContactViewModel
+<div>
+    <label asp-for="Name"></label><br />
+    <input asp-for="Name" type="text" class="form-control" placeholder="Enter Name..." aria-label="Enter Name..." style="width:30%;margin-bottom:5px"/>
+    <span asp-validation-for="Name" style="color:red"></span>
+</div>
+<div>
+    <label asp-for="Number"></label><br />
+    <input asp-for="Number" type="text" class="form-control" placeholder="Enter Number..." aria-label="Enter Number..." style="width:30%;margin-bottom:5px" />
+    <span asp-validation-for="Number" style="color:red"></span>
+</div>
+<br />
+<div>
+    <button class="btn btn-primary">Submit</button>
+</div>
