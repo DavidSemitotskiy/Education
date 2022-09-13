@@ -1,5 +1,6 @@
 using ContactsWeb.Data;
 using ContactsWeb.Entities;
+using ContactsWeb.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 });
 
 builder.Services.AddScoped<IRepository<Contact>, ContactRepository>();
+builder.Services.AddScoped<IContactManager, ContactManager>();
 
 builder.Services.AddControllersWithViews();
 
