@@ -78,5 +78,18 @@ namespace ContactsWeb.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var contactToDelete = _contactManager.FindById(id);
+            if (contactToDelete != null)
+            {
+                _contactManager.Delete(contactToDelete);
+                await _contactManager.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
