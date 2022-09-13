@@ -1,8 +1,6 @@
 ﻿@using ContactsWeb.Entities
 @model List<Contact>
-
-@{
-    ViewData["Title"] = "Home Page";
+-moz-text-decoration-color    ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
@@ -32,8 +30,8 @@
                                 <td>@Model[i].Name</td>
                                 <td>@Model[i].Number</td>
                                 <td>
-                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Edit"><i class="bi bi-pencil-fill" style="display:inline-block;width:30px;height:30px;"></i></a>
-                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Delete"><i class="bi bi-trash" style="display:inline-block;width:30px;height:30px;"></i></a>
+                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Edit"><i class="bi bi-pencil-fill" style="display:inline-block;width:30px;height:30px;color:black;"></i></a>
+                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Delete"><i class="bi bi-trash" style="display:inline-block;width:30px;height:30px;color:black;"></i></a>
                                 </td>
                             </tr>
                         }
