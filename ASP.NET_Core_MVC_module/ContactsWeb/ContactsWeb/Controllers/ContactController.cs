@@ -43,5 +43,40 @@ namespace ContactsWeb.Controllers
 
             return View(contact);
         }
+
+        public IActionResult Edit(Guid id)
+        {
+            var contactToEdit = _contactManager.FindById(id);
+            if (contactToEdit != null)
+            {
+                var contactViewModel = new ContactViewModel
+                {
+                    Name = contactToEdit.Name,
+                    Number = contactToEdit.Number
+                };
+                ViewData["IdEditContact"] = id;
+                return View(contactViewModel);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ContactViewModel contact, Guid id)
+        {
+            if (ModelState.IsValid)
+            {
+                var contactToUpdate = new Contact
+                {
+                    Id = id,
+                    Name = contact.Name,
+                    Number = contact.Number
+                };
+                _contactManager.Update(contactToUpdate);
+                await _contactManager.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
