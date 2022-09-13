@@ -80,9 +80,10 @@ namespace ContactsWeb.Controllers
 
                 _contactManager.Update(contactToUpdate);
                 await _contactManager.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "Home");
+            return View(contact);
         }
 
         public async Task<IActionResult> Delete(Guid id)
