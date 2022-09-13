@@ -72,6 +72,12 @@ namespace ContactsWeb.Controllers
                     Name = contact.Name,
                     Number = contact.Number
                 };
+                if (await _contactManager.ExistsAsync(contactToUpdate))
+                {
+                    ModelState.AddModelError("Name", "This contact already exists");
+                    return View(contact);
+                }
+
                 _contactManager.Update(contactToUpdate);
                 await _contactManager.SaveChangesAsync();
             }
