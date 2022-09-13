@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ContactsWeb.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactsWeb.Models
 {
@@ -6,10 +7,10 @@ namespace ContactsWeb.Models
     {
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "This is a required field")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "This is a required field")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public string Number { get; set; }
     }
 }

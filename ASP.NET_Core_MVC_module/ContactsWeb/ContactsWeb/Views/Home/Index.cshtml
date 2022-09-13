@@ -1,4 +1,5 @@
 ﻿@using ContactsWeb.Entities
+@using ContactsWeb.Resources
 @model List<Contact>
 
 @{
@@ -11,7 +12,7 @@
         @{
             if(Model.Count() == 0)
             {
-                <h1>No data available</h1>
+                <h1>@PagesResources.Nodata</h1>
             }
             else
             {
@@ -42,6 +43,6 @@
             }
         }
         <br />
-        <a asp-action="Add" asp-controller="Contact">+ Add Contact</a>
+        <a asp-action="Add" asp-controller="Contact">@PagesResources.AddContact</a>
     </div>
 </div>

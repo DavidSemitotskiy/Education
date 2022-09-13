@@ -1,5 +1,6 @@
 ﻿using ContactsWeb.Entities;
 using ContactsWeb.Models;
+using ContactsWeb.Resources;
 using ContactsWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace ContactsWeb.Controllers
                 };
                 if (await _contactManager.ExistsAsync(newContact))
                 {
-                    ModelState.AddModelError("Name", "This contact already exists");
+                    ModelState.AddModelError("Name", ErrorMessages.AlreadyExists);
                     return View(contact);
                 }
 
@@ -74,7 +75,7 @@ namespace ContactsWeb.Controllers
                 };
                 if (await _contactManager.ExistsAsync(contactToUpdate))
                 {
-                    ModelState.AddModelError("Name", "This contact already exists");
+                    ModelState.AddModelError("Name", ErrorMessages.AlreadyExists);
                     return View(contact);
                 }
 
