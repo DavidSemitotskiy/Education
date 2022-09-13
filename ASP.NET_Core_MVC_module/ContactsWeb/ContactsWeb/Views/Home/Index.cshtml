@@ -1,0 +1,48 @@
+﻿@using ContactsWeb.Entities
+@using ContactsWeb.Resources
+@model List<Contact>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div>
+        @{
+            if(Model.Count() == 0)
+            {
+                <h1>@PagesResources.Nodata</h1>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Number</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @for(int i = 0; i < Model.Count(); i++)
+                        {
+                            <tr>
+                                <th>@(i + 1)</th>
+                                <td>@Model[i].Name</td>
+                                <td>@Model[i].Number</td>
+                                <td>
+                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Edit"><i class="bi bi-pencil-fill" style="display:inline-block;width:30px;height:30px;color:black;"></i></a>
+                                    <a asp-route-id="@Model[i].Id" asp-controller="Contact" asp-action="Delete"><i class="bi bi-trash" style="display:inline-block;width:30px;height:30px;color:black;"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+        <br />
+        <a asp-action="Add" asp-controller="Contact">@PagesResources.AddContact</a>
+    </div>
+</div>
